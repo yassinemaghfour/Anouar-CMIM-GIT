@@ -1,0 +1,11 @@
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\Service Import and Export.exe.config
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\Service Import and Export.exe
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\Service Import and Export.pdb
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.csprojAssemblyReference.cache
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service_Import_and_Export.Form1.resources
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service_Import_and_Export.Import.resources
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service_Import_and_Export.Properties.Resources.resources
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.csproj.GenerateResource.cache
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.csproj.CoreCompileInputs.cache
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.exe
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.pdb

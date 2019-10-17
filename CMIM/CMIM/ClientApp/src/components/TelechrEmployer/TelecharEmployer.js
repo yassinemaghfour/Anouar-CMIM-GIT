@@ -7,16 +7,13 @@ import withAuth from '../withAuth.js';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
-import AuthHelperMethods from "../AuthHelperMethods";
 
 function Emplo() {
-
     const onDrop = useCallback(acceptedFiles => {
         const reader = new FileReader()
         reader.onabort = () => console.log('file reading was aborted')
         reader.onerror = () => console.log('file reading has failed')
         reader.onload = (evt) => {
-            // Do whatever you want with the file contents
             console.log(evt);
             const bstr = evt.target.result;
             const wb = XLSX.read(bstr, { type: 'binary' });
@@ -29,7 +26,7 @@ function Emplo() {
             console.log(data);
             const data_arr = data.split("\n");
      
-            const Auth = new AuthHelperMethods();
+            //const Auth = new AuthHelperMethods();
 
                         for (var i = 1; i < data_arr.length - 1; i++) {
                             const data_ar = data_arr[i].split(",");
@@ -40,7 +37,7 @@ function Emplo() {
                                 'last_name': data_ar[5],
                                 'company': '',
                                 'placeplacdeid': 1,
-                                'UserId': Auth.getProfile().unique_name
+                                //'UserId': Auth.getProfile().unique_name
                             }
 
                             switch(data_ar[2]) {
@@ -73,6 +70,7 @@ function Emplo() {
                             })
 
         }
+        acceptedFiles.forEach(file => reader.readAsArrayBuffer(file))
     }, [])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3331e76d04854d97be25d402168102f6" Name="Diagram1">
+        <EntityTypeShape EntityType="CMIMModel.C__EFMigrationsHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.ActivityPlace" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.Bordereau" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.bu" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.Conjoint" Width="1.5" PointX="7.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.Dossiers" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.employees" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.Enfant" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.list" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.Regul_Emp" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.Regularisation" Width="1.5" PointX="8.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.Remboursser" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.sites" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMIMModel.Users" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="CMIMModel.FK_employees_ActivityPlace_PlaceplacdeId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Dossiers_Bordereau_BordereauId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_employees_bu_buId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Conjoint_employees_Employeematricule" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Dossiers_Conjoint_ConjointId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Enfant_Conjoint_ConjointId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Dossiers_employees_employeematricule" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Dossiers_Enfant_EnfantId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Dossiers_Remboursser_rembourssementId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Dossiers_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_list_Dossiers_Dossierreferance" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_employees_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Enfant_employees_employeematricule" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Regul_Emp_employees_EmployeeMatricule" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_list_Remboursser_RembouserembourssementId" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Regul_Emp_Regularisation_RégularisationRegularisationID" ManuallyRouted="false" />
+        <AssociationConnector Association="CMIMModel.FK_Users_sites_siteId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

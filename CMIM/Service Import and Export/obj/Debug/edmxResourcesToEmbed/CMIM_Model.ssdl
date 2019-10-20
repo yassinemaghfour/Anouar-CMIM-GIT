@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__EFMigrationsHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActivityPlace">
+    <Key>
+      <PropertyRef Name="placdeId" />
+    </Key>
+    <Property Name="placdeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Bordereau">
+    <Key>
+      <PropertyRef Name="BordereauId" />
+    </Key>
+    <Property Name="BordereauId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Company" Type="nvarchar(max)" />
+    <Property Name="DateCreation" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bu">
+    <Key>
+      <PropertyRef Name="BuId" />
+    </Key>
+    <Property Name="BuId" Type="nvarchar" MaxLength="450" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Conjoint">
+    <Key>
+      <PropertyRef Name="ConjointId" />
+    </Key>
+    <Property Name="ConjointId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar(max)" />
+    <Property Name="Lastname" Type="nvarchar(max)" />
+    <Property Name="Employeematricule" Type="nvarchar" MaxLength="450" />
+    <Property Name="matriculecmim" Type="nvarchar(max)" />
+    <Property Name="DateNs" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dossiers">
+    <Key>
+      <PropertyRef Name="referance" />
+    </Key>
+    <Property Name="referance" Type="nvarchar" MaxLength="450" Nullable="false" />
+    <Property Name="employeematricule" Type="nvarchar" MaxLength="450" />
+    <Property Name="ConjointId" Type="bigint" />
+    <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="dateDossier" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="dateLunette" Type="datetime2" Precision="7" />
+    <Property Name="montant" Type="float" Nullable="false" />
+    <Property Name="Mt_radio" Type="float" Nullable="false" />
+    <Property Name="Mt_analyse" Type="float" Nullable="false" />
+    <Property Name="MtSoins_D" Type="float" Nullable="false" />
+    <Property Name="MtProthese_D" Type="float" Nullable="false" />
+    <Property Name="Devis_D" Type="float" Nullable="false" />
+    <Property Name="MtVisite_M" Type="float" Nullable="false" />
+    <Property Name="MtPharmacie_M" Type="float" Nullable="false" />
+    <Property Name="MtVisite_L" Type="float" Nullable="false" />
+    <Property Name="MtCadre_L" Type="float" Nullable="false" />
+    <Property Name="MtGi_L" Type="float" Nullable="false" />
+    <Property Name="avance" Type="float" Nullable="false" />
+    <Property Name="rembourse" Type="float" Nullable="false" />
+    <Property Name="diff" Type="float" Nullable="false" />
+    <Property Name="rembourssementId" Type="bigint" />
+    <Property Name="BordereauId" Type="bigint" />
+    <Property Name="etat" Type="nvarchar(max)" />
+    <Property Name="Type" Type="nvarchar(max)" />
+    <Property Name="EnfantId" Type="bigint" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="employees">
+    <Key>
+      <PropertyRef Name="matricule" />
+    </Key>
+    <Property Name="matricule" Type="nvarchar" MaxLength="450" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar(max)" />
+    <Property Name="last_name" Type="nvarchar(max)" />
+    <Property Name="adresse" Type="nvarchar(max)" />
+    <Property Name="matriculecmim" Type="nvarchar(max)" />
+    <Property Name="PlaceplacdeId" Type="bigint" Nullable="false" />
+    <Property Name="buId" Type="nvarchar" MaxLength="450" />
+    <Property Name="company" Type="nvarchar(max)" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Enfant">
+    <Key>
+      <PropertyRef Name="EnfantId" />
+    </Key>
+    <Property Name="EnfantId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar(max)" />
+    <Property Name="Lastname" Type="nvarchar(max)" />
+    <Property Name="DateNs" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="DateVs" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="ConjointId" Type="bigint" Nullable="false" />
+    <Property Name="employeematricule" Type="nvarchar" MaxLength="450" />
+    <Property Name="MatriculeCmim" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="list">
+    <Key>
+      <PropertyRef Name="listId" />
+    </Key>
+    <Property Name="listId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RembouserembourssementId" Type="bigint" Nullable="false" />
+    <Property Name="Dossierreferance" Type="nvarchar" MaxLength="450" />
+    <Property Name="montant" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Regul_Emp">
+    <Key>
+      <PropertyRef Name="regul_empID" />
+    </Key>
+    <Property Name="regul_empID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RégularisationRegularisationID" Type="bigint" />
+    <Property Name="EmployeeMatricule" Type="nvarchar" MaxLength="450" />
+    <Property Name="Total" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Regularisation">
+    <Key>
+      <PropertyRef Name="RegularisationID" />
+    </Key>
+    <Property Name="RegularisationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateRegularisation" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Mois" Type="nvarchar(max)" />
+    <Property Name="Total" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Remboursser">
+    <Key>
+      <PropertyRef Name="rembourssementId" />
+    </Key>
+    <Property Name="rembourssementId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateRembourssement" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sites">
+    <Key>
+      <PropertyRef Name="SiteId" />
+    </Key>
+    <Property Name="SiteId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="Username" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="Etat" Type="bit" Nullable="false" />
+    <Property Name="Token" Type="nvarchar(max)" />
+    <Property Name="siteId" Type="bigint" Nullable="false" />
+    <Property Name="Role" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_Conjoint_employees_Employeematricule">
+    <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+    <End Role="Conjoint" Type="Self.Conjoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="matricule" />
+      </Principal>
+      <Dependent Role="Conjoint">
+        <PropertyRef Name="Employeematricule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Bordereau_BordereauId">
+    <End Role="Bordereau" Type="Self.Bordereau" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bordereau">
+        <PropertyRef Name="BordereauId" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="BordereauId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Conjoint_ConjointId">
+    <End Role="Conjoint" Type="Self.Conjoint" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conjoint">
+        <PropertyRef Name="ConjointId" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="ConjointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_employees_employeematricule">
+    <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="matricule" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="employeematricule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Enfant_EnfantId">
+    <End Role="Enfant" Type="Self.Enfant" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enfant">
+        <PropertyRef Name="EnfantId" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="EnfantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Remboursser_rembourssementId">
+    <End Role="Remboursser" Type="Self.Remboursser" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Remboursser">
+        <PropertyRef Name="rembourssementId" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="rembourssementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Users_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employees_ActivityPlace_PlaceplacdeId">
+    <End Role="ActivityPlace" Type="Self.ActivityPlace" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="employees" Type="Self.employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityPlace">
+        <PropertyRef Name="placdeId" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="PlaceplacdeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employees_bu_buId">
+    <End Role="bu" Type="Self.bu" Multiplicity="0..1" />
+    <End Role="employees" Type="Self.employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bu">
+        <PropertyRef Name="BuId" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="buId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employees_Users_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="employees" Type="Self.employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enfant_Conjoint_ConjointId">
+    <End Role="Conjoint" Type="Self.Conjoint" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Enfant" Type="Self.Enfant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conjoint">
+        <PropertyRef Name="ConjointId" />
+      </Principal>
+      <Dependent Role="Enfant">
+        <PropertyRef Name="ConjointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enfant_employees_employeematricule">
+    <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+    <End Role="Enfant" Type="Self.Enfant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="matricule" />
+      </Principal>
+      <Dependent Role="Enfant">
+        <PropertyRef Name="employeematricule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_list_Dossiers_Dossierreferance">
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="0..1" />
+    <End Role="list" Type="Self.list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dossiers">
+        <PropertyRef Name="referance" />
+      </Principal>
+      <Dependent Role="list">
+        <PropertyRef Name="Dossierreferance" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_list_Remboursser_RembouserembourssementId">
+    <End Role="Remboursser" Type="Self.Remboursser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="list" Type="Self.list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Remboursser">
+        <PropertyRef Name="rembourssementId" />
+      </Principal>
+      <Dependent Role="list">
+        <PropertyRef Name="RembouserembourssementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Regul_Emp_employees_EmployeeMatricule">
+    <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+    <End Role="Regul_Emp" Type="Self.Regul_Emp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="matricule" />
+      </Principal>
+      <Dependent Role="Regul_Emp">
+        <PropertyRef Name="EmployeeMatricule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Regul_Emp_Regularisation_RégularisationRegularisationID">
+    <End Role="Regularisation" Type="Self.Regularisation" Multiplicity="0..1" />
+    <End Role="Regul_Emp" Type="Self.Regul_Emp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Regularisation">
+        <PropertyRef Name="RegularisationID" />
+      </Principal>
+      <Dependent Role="Regul_Emp">
+        <PropertyRef Name="RégularisationRegularisationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_sites_siteId">
+    <End Role="sites" Type="Self.sites" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sites">
+        <PropertyRef Name="SiteId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="siteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CMIMModelStoreContainer">
+    <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActivityPlace" EntityType="Self.ActivityPlace" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bordereau" EntityType="Self.Bordereau" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bu" EntityType="Self.bu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Conjoint" EntityType="Self.Conjoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dossiers" EntityType="Self.Dossiers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enfant" EntityType="Self.Enfant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="list" EntityType="Self.list" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Regul_Emp" EntityType="Self.Regul_Emp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Regularisation" EntityType="Self.Regularisation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Remboursser" EntityType="Self.Remboursser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sites" EntityType="Self.sites" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Conjoint_employees_Employeematricule" Association="Self.FK_Conjoint_employees_Employeematricule">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Conjoint" EntitySet="Conjoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Bordereau_BordereauId" Association="Self.FK_Dossiers_Bordereau_BordereauId">
+      <End Role="Bordereau" EntitySet="Bordereau" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Conjoint_ConjointId" Association="Self.FK_Dossiers_Conjoint_ConjointId">
+      <End Role="Conjoint" EntitySet="Conjoint" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_employees_employeematricule" Association="Self.FK_Dossiers_employees_employeematricule">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Enfant_EnfantId" Association="Self.FK_Dossiers_Enfant_EnfantId">
+      <End Role="Enfant" EntitySet="Enfant" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Remboursser_rembourssementId" Association="Self.FK_Dossiers_Remboursser_rembourssementId">
+      <End Role="Remboursser" EntitySet="Remboursser" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Users_UserId" Association="Self.FK_Dossiers_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employees_ActivityPlace_PlaceplacdeId" Association="Self.FK_employees_ActivityPlace_PlaceplacdeId">
+      <End Role="ActivityPlace" EntitySet="ActivityPlace" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employees_bu_buId" Association="Self.FK_employees_bu_buId">
+      <End Role="bu" EntitySet="bu" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employees_Users_UserId" Association="Self.FK_employees_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enfant_Conjoint_ConjointId" Association="Self.FK_Enfant_Conjoint_ConjointId">
+      <End Role="Conjoint" EntitySet="Conjoint" />
+      <End Role="Enfant" EntitySet="Enfant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enfant_employees_employeematricule" Association="Self.FK_Enfant_employees_employeematricule">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Enfant" EntitySet="Enfant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_list_Dossiers_Dossierreferance" Association="Self.FK_list_Dossiers_Dossierreferance">
+      <End Role="Dossiers" EntitySet="Dossiers" />
+      <End Role="list" EntitySet="list" />
+    </AssociationSet>
+    <AssociationSet Name="FK_list_Remboursser_RembouserembourssementId" Association="Self.FK_list_Remboursser_RembouserembourssementId">
+      <End Role="Remboursser" EntitySet="Remboursser" />
+      <End Role="list" EntitySet="list" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Regul_Emp_employees_EmployeeMatricule" Association="Self.FK_Regul_Emp_employees_EmployeeMatricule">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Regul_Emp" EntitySet="Regul_Emp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Regul_Emp_Regularisation_RégularisationRegularisationID" Association="Self.FK_Regul_Emp_Regularisation_RégularisationRegularisationID">
+      <End Role="Regularisation" EntitySet="Regularisation" />
+      <End Role="Regul_Emp" EntitySet="Regul_Emp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_sites_siteId" Association="Self.FK_Users_sites_siteId">
+      <End Role="sites" EntitySet="sites" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

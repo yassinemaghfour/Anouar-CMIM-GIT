@@ -31,7 +31,7 @@ namespace Service_Import_and_Export
         public long PlaceplacdeId { get; set; }
         public string buId { get; set; }
         public string company { get; set; }
-        public long UserId { get; set; }
+        public Nullable<long> UserId { get; set; }
     
         public virtual ActivityPlace ActivityPlace { get; set; }
         public virtual bu bu { get; set; }

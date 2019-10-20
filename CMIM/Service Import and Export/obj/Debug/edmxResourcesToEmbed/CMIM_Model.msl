@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CMIMModelStoreContainer" CdmEntityContainer="CMIMEntities">
+    <EntitySetMapping Name="C__EFMigrationsHistory">
+      <EntityTypeMapping TypeName="CMIMModel.C__EFMigrationsHistory">
+        <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityPlace">
+      <EntityTypeMapping TypeName="CMIMModel.ActivityPlace">
+        <MappingFragment StoreEntitySet="ActivityPlace">
+          <ScalarProperty Name="placdeId" ColumnName="placdeId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bordereau">
+      <EntityTypeMapping TypeName="CMIMModel.Bordereau">
+        <MappingFragment StoreEntitySet="Bordereau">
+          <ScalarProperty Name="BordereauId" ColumnName="BordereauId" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bu">
+      <EntityTypeMapping TypeName="CMIMModel.bu">
+        <MappingFragment StoreEntitySet="bu">
+          <ScalarProperty Name="BuId" ColumnName="BuId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conjoint">
+      <EntityTypeMapping TypeName="CMIMModel.Conjoint">
+        <MappingFragment StoreEntitySet="Conjoint">
+          <ScalarProperty Name="ConjointId" ColumnName="ConjointId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Employeematricule" ColumnName="Employeematricule" />
+          <ScalarProperty Name="matriculecmim" ColumnName="matriculecmim" />
+          <ScalarProperty Name="DateNs" ColumnName="DateNs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dossiers">
+      <EntityTypeMapping TypeName="CMIMModel.Dossiers">
+        <MappingFragment StoreEntitySet="Dossiers">
+          <ScalarProperty Name="referance" ColumnName="referance" />
+          <ScalarProperty Name="employeematricule" ColumnName="employeematricule" />
+          <ScalarProperty Name="ConjointId" ColumnName="ConjointId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="dateDossier" ColumnName="dateDossier" />
+          <ScalarProperty Name="dateLunette" ColumnName="dateLunette" />
+          <ScalarProperty Name="montant" ColumnName="montant" />
+          <ScalarProperty Name="Mt_radio" ColumnName="Mt_radio" />
+          <ScalarProperty Name="Mt_analyse" ColumnName="Mt_analyse" />
+          <ScalarProperty Name="MtSoins_D" ColumnName="MtSoins_D" />
+          <ScalarProperty Name="MtProthese_D" ColumnName="MtProthese_D" />
+          <ScalarProperty Name="Devis_D" ColumnName="Devis_D" />
+          <ScalarProperty Name="MtVisite_M" ColumnName="MtVisite_M" />
+          <ScalarProperty Name="MtPharmacie_M" ColumnName="MtPharmacie_M" />
+          <ScalarProperty Name="MtVisite_L" ColumnName="MtVisite_L" />
+          <ScalarProperty Name="MtCadre_L" ColumnName="MtCadre_L" />
+          <ScalarProperty Name="MtGi_L" ColumnName="MtGi_L" />
+          <ScalarProperty Name="avance" ColumnName="avance" />
+          <ScalarProperty Name="rembourse" ColumnName="rembourse" />
+          <ScalarProperty Name="diff" ColumnName="diff" />
+          <ScalarProperty Name="rembourssementId" ColumnName="rembourssementId" />
+          <ScalarProperty Name="BordereauId" ColumnName="BordereauId" />
+          <ScalarProperty Name="etat" ColumnName="etat" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="EnfantId" ColumnName="EnfantId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Enfant">
+      <EntityTypeMapping TypeName="CMIMModel.Enfant">
+        <MappingFragment StoreEntitySet="Enfant">
+          <ScalarProperty Name="EnfantId" ColumnName="EnfantId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="DateNs" ColumnName="DateNs" />
+          <ScalarProperty Name="DateVs" ColumnName="DateVs" />
+          <ScalarProperty Name="ConjointId" ColumnName="ConjointId" />
+          <ScalarProperty Name="employeematricule" ColumnName="employeematricule" />
+          <ScalarProperty Name="MatriculeCmim" ColumnName="MatriculeCmim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="list">
+      <EntityTypeMapping TypeName="CMIMModel.list">
+        <MappingFragment StoreEntitySet="list">
+          <ScalarProperty Name="listId" ColumnName="listId" />
+          <ScalarProperty Name="RembouserembourssementId" ColumnName="RembouserembourssementId" />
+          <ScalarProperty Name="Dossierreferance" ColumnName="Dossierreferance" />
+          <ScalarProperty Name="montant" ColumnName="montant" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regul_Emp">
+      <EntityTypeMapping TypeName="CMIMModel.Regul_Emp">
+        <MappingFragment StoreEntitySet="Regul_Emp">
+          <ScalarProperty Name="regul_empID" ColumnName="regul_empID" />
+          <ScalarProperty Name="RégularisationRegularisationID" ColumnName="RégularisationRegularisationID" />
+          <ScalarProperty Name="EmployeeMatricule" ColumnName="EmployeeMatricule" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regularisation">
+      <EntityTypeMapping TypeName="CMIMModel.Regularisation">
+        <MappingFragment StoreEntitySet="Regularisation">
+          <ScalarProperty Name="RegularisationID" ColumnName="RegularisationID" />
+          <ScalarProperty Name="dateRegularisation" ColumnName="dateRegularisation" />
+          <ScalarProperty Name="Mois" ColumnName="Mois" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Remboursser">
+      <EntityTypeMapping TypeName="CMIMModel.Remboursser">
+        <MappingFragment StoreEntitySet="Remboursser">
+          <ScalarProperty Name="rembourssementId" ColumnName="rembourssementId" />
+          <ScalarProperty Name="DateRembourssement" ColumnName="DateRembourssement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sites">
+      <EntityTypeMapping TypeName="CMIMModel.sites">
+        <MappingFragment StoreEntitySet="sites">
+          <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="CMIMModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CMIMModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Etat" ColumnName="Etat" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="CMIMModel.employees">
+        <MappingFragment StoreEntitySet="employees">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="buId" ColumnName="buId" />
+          <ScalarProperty Name="PlaceplacdeId" ColumnName="PlaceplacdeId" />
+          <ScalarProperty Name="matriculecmim" ColumnName="matriculecmim" />
+          <ScalarProperty Name="adresse" ColumnName="adresse" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="matricule" ColumnName="matricule" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

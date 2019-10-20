@@ -19,7 +19,7 @@ namespace Service_Import_and_Export
         public string EmployeeMatricule { get; set; }
         public double Total { get; set; }
     
-        public virtual employees employees { get; set; }
         public virtual Regularisation Regularisation { get; set; }
+        public virtual employees employees { get; set; }
     }
 }

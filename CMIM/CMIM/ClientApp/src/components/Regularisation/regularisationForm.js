@@ -305,7 +305,7 @@ today = mm + '/' + dd + '/' + yyyy + ' ' + hh + ':' + MMM;
       <Grid container style={{width:"90%",margin:"0 auto"}}>
         <Grid item xs={12}  >
           <Paper>
-          {this.state.isLoad && <LinearProgress color="primary" />}
+          {!this.state.isLoad && <LinearProgress color="primary" />}
 
           <form className={classes.container} Validate autoComplete="off" style={{textAlign:"center"}} onSubmit={this.handleSubmit} >
 
@@ -451,8 +451,9 @@ today = mm + '/' + dd + '/' + yyyy + ' ' + hh + ':' + MMM;
         ]}
       />
             <Grid item xs={12}>
-       {this.state.isLoad && <Regularisationemployee data={this.state.regularisation_employee}></Regularisationemployee>}
-          
+            {this.state.isLoad && (this.state.regularisation_employee != null && this.state.regularisation_employee.length > 0)
+                                    && <Regularisationemployee data={this.state.regularisation_employee}></Regularisationemployee>}
+         
           </Grid>
       </Grid>
     );

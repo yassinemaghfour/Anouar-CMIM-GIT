@@ -393,23 +393,6 @@ class MiniDrawer extends React.Component {
                     </ListItem>
 
                     </Link>
-
-<Link to="/ImporterRembourssement" style={{ textDecoration: "none" }}>
-                        <ListItem button key="rembourssement" selected={this.state.selectedIndex === 6}
-                            onClick={event => this.handleListItemClick(event, 6)}>
-                            <ListItemIcon> <Backup/> </ListItemIcon>
-                            <ListItemText primary="Importer un Remboursement" />
-                        </ListItem>
-                    </Link>
-
-<Link to="/Emplo" style={{ textDecoration: "none" }}>
-                        <ListItem button key="rembourssement" selected={this.state.selectedIndex === 8}
-                            onClick={event => this.handleListItemClick(event, 8)}>
-                            <ListItemIcon><SvgIcon> <Backup/></SvgIcon> </ListItemIcon>
-                            <ListItemText primary="Importer liste des employés" />
-                        </ListItem>
-                    </Link>
-
                    
 
             <Link to="/employees" style={{textDecoration:"none"}}>

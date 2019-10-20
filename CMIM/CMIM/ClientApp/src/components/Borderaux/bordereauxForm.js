@@ -1,38 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
 import axios from 'axios';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import { Link, Switch, NavLink} from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
-import Chip from '@material-ui/core/Chip';
-import Dossies from '../Dossies/Dossies.js';
+import Dossies from '../UserControl/UC_Dossiers';
 import AuthHelperMethods from "../AuthHelperMethods";
 import { withRouter } from "react-router-dom";
-
-
-
-
-
 
 const styles = theme => ({
   container: {
@@ -178,6 +158,22 @@ handleSubmit = (e) => {
 
   e.preventDefault();
   }
+
+getBordereauInfo = async () => {
+  let res = await axios.get(`/api/Bordereaux/${this.props.match.params.brdID}`);
+    if(res.status == 200)
+    {
+      console.log("Res");
+      console.log(res);
+      this.setState({
+        dateCreation: new Date(res.data.dateCreation) ,
+        company: res.data.company ,
+        dossiers: res.data.dossiers,
+        isLoad : false
+      });
+    }
+}
+
   componentDidMount()
   {
     const Auth = new AuthHelperMethods();
@@ -185,30 +181,25 @@ handleSubmit = (e) => {
         this.props.history.replace('/SignIn');
         return;
     }
-      console.log('bbbbbbbbbbbbbbbbbbbb');
       this.setState({
         bordereauId:this.props.match.params.brdID
       });
 
-    axios.get(`/api/Bordereaux/${this.props.match.params.brdID}`)
-    .then(res => {
-      if(res.status == 200)
+      axios.get(`/api/Bordereaux/${this.props.match.params.brdID}`)
+      .then(res => {
+        if(res.status == 200)
       {
+        console.log("Res");
         console.log(res);
         this.setState({
           dateCreation: new Date(res.data.dateCreation) ,
           company: res.data.company ,
           dossiers: res.data.dossiers,
-          isLoad : true
+          isLoad : false
         });
-        console.log("data");
-        console.log(this.state);
-        console.log("end data");
       }
-  });
-    this.setState({
-      isLoad:false
-    })
+      });
+      
   }
 
   constructor(props)
@@ -220,7 +211,7 @@ handleSubmit = (e) => {
        bordereauId: props.match.params.brdID,
        etat:'ouvert',
        add:props.isAdd == "true" ? true : false,
-       isLoad:props.isAdd == "true" ? false : true ,
+       
      }
      console.log(props);
   }
@@ -312,7 +303,8 @@ handleSubmit = (e) => {
         ]}
       />
        <Grid item xs={12}>
-       {this.state.isLoad && <Dossies data={this.state.dossiers}></Dossies>}
+       {!this.state.isLoad && (this.state.dossiers != null && this.state.dossiers.length > 0)
+                                    && <Dossies data={this.state.dossiers} />}
           
           </Grid>
       </Grid>

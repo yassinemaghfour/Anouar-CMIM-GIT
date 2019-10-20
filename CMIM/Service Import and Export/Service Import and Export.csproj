@@ -102,6 +102,12 @@
     <Compile Include="Enfant.cs">
       <DependentUpon>CMIM_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Export.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Export.Designer.cs">
+      <DependentUpon>Export.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     <Compile Include="Users.cs">
       <DependentUpon>CMIM_Model.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Export.resx">
+      <DependentUpon>Export.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

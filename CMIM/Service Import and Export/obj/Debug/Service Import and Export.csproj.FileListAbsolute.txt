@@ -9,3 +9,10 @@ C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and E
 C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.csproj.CoreCompileInputs.cache
 C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.exe
 C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.pdb
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\EntityFramework.dll
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\EPPlus.dll
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\EntityFramework.xml
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\EPPlus.xml
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.csproj.CopyComplete

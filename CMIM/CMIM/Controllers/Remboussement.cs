@@ -36,8 +36,11 @@ namespace Cmim.Controllers
             }
 
             var rembousse = context.Remboursser.Where(R => R.rembourssementId == id)
-                .Include(R => R.list)
-                    .ThenInclude(l => l.Select(o => o.Dossier))
+                .Select(R => new
+                {
+                    Rembourssemnt = R,
+                    Dossiers = R.list.Select(L => L.Dossier)
+                })
                 .FirstOrDefault();
 
             if (rembousse == null)

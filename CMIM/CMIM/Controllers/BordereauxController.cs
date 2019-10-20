@@ -36,7 +36,7 @@ namespace Cmim.Controllers
                 return BadRequest(ModelState);
             }
 
-            var bordereau = await _context.Bordereau.FindAsync(id);
+            var bordereau = _context.Bordereau.Where(B => B.BordereauId == id).Include(B => B.Dossiers).FirstOrDefault();
 
             if (bordereau == null)
             {

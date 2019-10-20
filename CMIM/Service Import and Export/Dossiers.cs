@@ -49,11 +49,11 @@ namespace Service_Import_and_Export
     
         public virtual Bordereau Bordereau { get; set; }
         public virtual Conjoint Conjoint { get; set; }
-        public virtual employees employees { get; set; }
         public virtual Enfant Enfant { get; set; }
         public virtual Remboursser Remboursser { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<list> list { get; set; }
+        public virtual employees employees { get; set; }
     }
 }

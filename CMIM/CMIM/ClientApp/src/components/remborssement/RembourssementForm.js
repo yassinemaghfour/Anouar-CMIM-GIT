@@ -1,28 +1,13 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import Snackbar from '@material-ui/core/Snackbar';
-import CloseIcon from '@material-ui/icons/Close';
-import ConjointList from '../Conjoint/ConjointList.js';
-import Dossies from '../Dossies/Dossies.js';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Enfant from '../Enfant/Enfants';
-import { transcode } from 'buffer';
-import withAuth from '../withAuth.js';
+import Dossies from '../UserControl/UC_Dossiers';
 
 function TabContainer(props) {
     return (
@@ -165,14 +150,7 @@ class EnhancedTableHead2 extends React.Component {
     };
 
     componentDidMount() {
-        fetch('api/list')
-            .then(response => response.json())
-            .then(data => {
-                console.log('teste');
-                console.log(data);
-                console.log('teste');
-
-            });
+        console.log("Rembourssement ID: " + this.props.match.params.mat);
         axios.get(`/api/Remboussement/${this.props.match.params.mat}`)
             .then(res => {
                 console.log('yesyes');
@@ -183,11 +161,11 @@ class EnhancedTableHead2 extends React.Component {
                 // }
                 this.setState({
 
-                        'matricule': res.data.rembourssementId,
+                        'matricule': res.data.rembourssemnt.rembourssementId,
                        
-                       'date': res.data.dateRembourssement,
-                        'isLoad': true,
-                        'dossies': dos,     
+                       'date': res.data.rembourssemnt.dateRembourssement,
+                        'isLoad': false,
+                        'dossies': res.data.dossiers,     
                 })
                 console.log('yesyes2');
                 console.log(this.state.dossies);
@@ -256,7 +234,8 @@ class EnhancedTableHead2 extends React.Component {
                                 </Grid>
                                 <Grid item xs={12}>
 
-                                    {this.state.isLoad && <Dossies data={this.state.dossies} />}
+                                    {!this.state.isLoad && (this.state.dossies != null && this.state.dossies.length > 0)
+                                    && <Dossies data={this.state.dossies} />}
                                                          
                                 </Grid>
                             </form>

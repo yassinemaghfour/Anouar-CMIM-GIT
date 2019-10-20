@@ -38,7 +38,9 @@ namespace CMIM.Controllers
                 return BadRequest(ModelState);
             }
 
-            var régularisation = await _context.Regularisation.FindAsync(id);
+            var régularisation = _context.Regularisation.Include(R => R.listDesRégularisation)
+                .ThenInclude(R => R.Employee)
+                .Where(R => R.RegularisationID == id).FirstOrDefault();
 
             if (régularisation == null)
             {

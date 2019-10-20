@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CMIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CMIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__EFMigrationsHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -88,7 +88,7 @@
           <Property Name="PlaceplacdeId" Type="bigint" Nullable="false" />
           <Property Name="buId" Type="nvarchar" MaxLength="450" />
           <Property Name="company" Type="nvarchar(max)" />
-          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="bigint" />
         </EntityType>
         <EntityType Name="Enfant">
           <Key>
@@ -282,7 +282,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_employees_Users_UserId">
-          <End Role="Users" Type="Self.Users" Multiplicity="1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="employees" Type="Self.employees" Multiplicity="*" />
@@ -470,8 +470,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CMIMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -488,7 +487,7 @@
           </Key>
           <Property Name="placdeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="employees" Relationship="Self.FK_employees_ActivityPlace_PlaceplacdeId" FromRole="ActivityPlace" ToRole="employees" />
+          <NavigationProperty Name="employees" Relationship="CMIMModel.FK_employees_ActivityPlace_PlaceplacdeId" FromRole="ActivityPlace" ToRole="employees" />
         </EntityType>
         <EntityType Name="Bordereau">
           <Key>
@@ -505,7 +504,7 @@
           </Key>
           <Property Name="BuId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="employees" Relationship="Self.FK_employees_bu_buId" FromRole="bu" ToRole="employees" />
+          <NavigationProperty Name="employees" Relationship="CMIMModel.FK_employees_bu_buId" FromRole="bu" ToRole="employees" />
         </EntityType>
         <EntityType Name="Conjoint">
           <Key>
@@ -517,9 +516,9 @@
           <Property Name="Employeematricule" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="matriculecmim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateNs" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="employees" Relationship="Self.FK_Conjoint_employees_Employeematricule" FromRole="Conjoint" ToRole="employees" />
           <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_Conjoint_ConjointId" FromRole="Conjoint" ToRole="Dossiers" />
           <NavigationProperty Name="Enfant" Relationship="Self.FK_Enfant_Conjoint_ConjointId" FromRole="Conjoint" ToRole="Enfant" />
+          <NavigationProperty Name="employees" Relationship="CMIMModel.FK_Conjoint_employees_Employeematricule" FromRole="Conjoint" ToRole="employees" />
         </EntityType>
         <EntityType Name="Dossiers">
           <Key>
@@ -553,32 +552,11 @@
           <Property Name="UserId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Bordereau" Relationship="Self.FK_Dossiers_Bordereau_BordereauId" FromRole="Dossiers" ToRole="Bordereau" />
           <NavigationProperty Name="Conjoint" Relationship="Self.FK_Dossiers_Conjoint_ConjointId" FromRole="Dossiers" ToRole="Conjoint" />
-          <NavigationProperty Name="employees" Relationship="Self.FK_Dossiers_employees_employeematricule" FromRole="Dossiers" ToRole="employees" />
           <NavigationProperty Name="Enfant" Relationship="Self.FK_Dossiers_Enfant_EnfantId" FromRole="Dossiers" ToRole="Enfant" />
           <NavigationProperty Name="Remboursser" Relationship="Self.FK_Dossiers_Remboursser_rembourssementId" FromRole="Dossiers" ToRole="Remboursser" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Dossiers_Users_UserId" FromRole="Dossiers" ToRole="Users" />
           <NavigationProperty Name="list" Relationship="Self.FK_list_Dossiers_Dossierreferance" FromRole="Dossiers" ToRole="list" />
-        </EntityType>
-        <EntityType Name="employees">
-          <Key>
-            <PropertyRef Name="matricule" />
-          </Key>
-          <Property Name="matricule" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="first_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="last_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="matriculecmim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PlaceplacdeId" Type="Int64" Nullable="false" />
-          <Property Name="buId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
-          <Property Name="company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="ActivityPlace" Relationship="Self.FK_employees_ActivityPlace_PlaceplacdeId" FromRole="employees" ToRole="ActivityPlace" />
-          <NavigationProperty Name="bu" Relationship="Self.FK_employees_bu_buId" FromRole="employees" ToRole="bu" />
-          <NavigationProperty Name="Conjoint" Relationship="Self.FK_Conjoint_employees_Employeematricule" FromRole="employees" ToRole="Conjoint" />
-          <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_employees_employeematricule" FromRole="employees" ToRole="Dossiers" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_employees_Users_UserId" FromRole="employees" ToRole="Users" />
-          <NavigationProperty Name="Enfant" Relationship="Self.FK_Enfant_employees_employeematricule" FromRole="employees" ToRole="Enfant" />
-          <NavigationProperty Name="Regul_Emp" Relationship="Self.FK_Regul_Emp_employees_EmployeeMatricule" FromRole="employees" ToRole="Regul_Emp" />
+          <NavigationProperty Name="employees" Relationship="CMIMModel.FK_Dossiers_employees_employeematricule" FromRole="Dossiers" ToRole="employees" />
         </EntityType>
         <EntityType Name="Enfant">
           <Key>
@@ -594,7 +572,7 @@
           <Property Name="MatriculeCmim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Conjoint" Relationship="Self.FK_Enfant_Conjoint_ConjointId" FromRole="Enfant" ToRole="Conjoint" />
           <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_Enfant_EnfantId" FromRole="Enfant" ToRole="Dossiers" />
-          <NavigationProperty Name="employees" Relationship="Self.FK_Enfant_employees_employeematricule" FromRole="Enfant" ToRole="employees" />
+          <NavigationProperty Name="employees" Relationship="CMIMModel.FK_Enfant_employees_employeematricule" FromRole="Enfant" ToRole="employees" />
         </EntityType>
         <EntityType Name="list">
           <Key>
@@ -615,8 +593,8 @@
           <Property Name="RégularisationRegularisationID" Type="Int64" />
           <Property Name="EmployeeMatricule" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="Total" Type="Double" Nullable="false" />
-          <NavigationProperty Name="employees" Relationship="Self.FK_Regul_Emp_employees_EmployeeMatricule" FromRole="Regul_Emp" ToRole="employees" />
           <NavigationProperty Name="Regularisation" Relationship="Self.FK_Regul_Emp_Regularisation_RégularisationRegularisationID" FromRole="Regul_Emp" ToRole="Regularisation" />
+          <NavigationProperty Name="employees" Relationship="CMIMModel.FK_Regul_Emp_employees_EmployeeMatricule" FromRole="Regul_Emp" ToRole="employees" />
         </EntityType>
         <EntityType Name="Regularisation">
           <Key>
@@ -670,23 +648,9 @@
           <Property Name="siteId" Type="Int64" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_Users_UserId" FromRole="Users" ToRole="Dossiers" />
-          <NavigationProperty Name="employees" Relationship="Self.FK_employees_Users_UserId" FromRole="Users" ToRole="employees" />
           <NavigationProperty Name="sites" Relationship="Self.FK_Users_sites_siteId" FromRole="Users" ToRole="sites" />
+          <NavigationProperty Name="employees" Relationship="CMIMModel.FK_employees_Users_UserId" FromRole="Users" ToRole="employees" />
         </EntityType>
-        <Association Name="FK_employees_ActivityPlace_PlaceplacdeId">
-          <End Role="ActivityPlace" Type="Self.ActivityPlace" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="employees" Type="Self.employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ActivityPlace">
-              <PropertyRef Name="placdeId" />
-            </Principal>
-            <Dependent Role="employees">
-              <PropertyRef Name="PlaceplacdeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Dossiers_Bordereau_BordereauId">
           <End Role="Bordereau" Type="Self.Bordereau" Multiplicity="0..1" />
           <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
@@ -696,30 +660,6 @@
             </Principal>
             <Dependent Role="Dossiers">
               <PropertyRef Name="BordereauId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_employees_bu_buId">
-          <End Role="bu" Type="Self.bu" Multiplicity="0..1" />
-          <End Role="employees" Type="Self.employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bu">
-              <PropertyRef Name="BuId" />
-            </Principal>
-            <Dependent Role="employees">
-              <PropertyRef Name="buId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Conjoint_employees_Employeematricule">
-          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
-          <End Role="Conjoint" Type="Self.Conjoint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employees">
-              <PropertyRef Name="matricule" />
-            </Principal>
-            <Dependent Role="Conjoint">
-              <PropertyRef Name="Employeematricule" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -746,18 +686,6 @@
             </Principal>
             <Dependent Role="Enfant">
               <PropertyRef Name="ConjointId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Dossiers_employees_employeematricule">
-          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
-          <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employees">
-              <PropertyRef Name="matricule" />
-            </Principal>
-            <Dependent Role="Dossiers">
-              <PropertyRef Name="employeematricule" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -811,44 +739,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_employees_Users_UserId">
-          <End Role="Users" Type="Self.Users" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="employees" Type="Self.employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="employees">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Enfant_employees_employeematricule">
-          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
-          <End Role="Enfant" Type="Self.Enfant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employees">
-              <PropertyRef Name="matricule" />
-            </Principal>
-            <Dependent Role="Enfant">
-              <PropertyRef Name="employeematricule" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Regul_Emp_employees_EmployeeMatricule">
-          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
-          <End Role="Regul_Emp" Type="Self.Regul_Emp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employees">
-              <PropertyRef Name="matricule" />
-            </Principal>
-            <Dependent Role="Regul_Emp">
-              <PropertyRef Name="EmployeeMatricule" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_list_Remboursser_RembouserembourssementId">
           <End Role="Remboursser" Type="Self.Remboursser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -896,7 +786,6 @@
           <EntitySet Name="bu" EntityType="Self.bu" />
           <EntitySet Name="Conjoint" EntityType="Self.Conjoint" />
           <EntitySet Name="Dossiers" EntityType="Self.Dossiers" />
-          <EntitySet Name="employees" EntityType="Self.employees" />
           <EntitySet Name="Enfant" EntityType="Self.Enfant" />
           <EntitySet Name="list" EntityType="Self.list" />
           <EntitySet Name="Regul_Emp" EntityType="Self.Regul_Emp" />
@@ -905,21 +794,9 @@
           <EntitySet Name="sites" EntityType="Self.sites" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK_employees_ActivityPlace_PlaceplacdeId" Association="Self.FK_employees_ActivityPlace_PlaceplacdeId">
-            <End Role="ActivityPlace" EntitySet="ActivityPlace" />
-            <End Role="employees" EntitySet="employees" />
-          </AssociationSet>
           <AssociationSet Name="FK_Dossiers_Bordereau_BordereauId" Association="Self.FK_Dossiers_Bordereau_BordereauId">
             <End Role="Bordereau" EntitySet="Bordereau" />
             <End Role="Dossiers" EntitySet="Dossiers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_employees_bu_buId" Association="Self.FK_employees_bu_buId">
-            <End Role="bu" EntitySet="bu" />
-            <End Role="employees" EntitySet="employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Conjoint_employees_Employeematricule" Association="Self.FK_Conjoint_employees_Employeematricule">
-            <End Role="employees" EntitySet="employees" />
-            <End Role="Conjoint" EntitySet="Conjoint" />
           </AssociationSet>
           <AssociationSet Name="FK_Dossiers_Conjoint_ConjointId" Association="Self.FK_Dossiers_Conjoint_ConjointId">
             <End Role="Conjoint" EntitySet="Conjoint" />
@@ -928,10 +805,6 @@
           <AssociationSet Name="FK_Enfant_Conjoint_ConjointId" Association="Self.FK_Enfant_Conjoint_ConjointId">
             <End Role="Conjoint" EntitySet="Conjoint" />
             <End Role="Enfant" EntitySet="Enfant" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Dossiers_employees_employeematricule" Association="Self.FK_Dossiers_employees_employeematricule">
-            <End Role="employees" EntitySet="employees" />
-            <End Role="Dossiers" EntitySet="Dossiers" />
           </AssociationSet>
           <AssociationSet Name="FK_Dossiers_Enfant_EnfantId" Association="Self.FK_Dossiers_Enfant_EnfantId">
             <End Role="Enfant" EntitySet="Enfant" />
@@ -949,18 +822,6 @@
             <End Role="Dossiers" EntitySet="Dossiers" />
             <End Role="list" EntitySet="list" />
           </AssociationSet>
-          <AssociationSet Name="FK_employees_Users_UserId" Association="Self.FK_employees_Users_UserId">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="employees" EntitySet="employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Enfant_employees_employeematricule" Association="Self.FK_Enfant_employees_employeematricule">
-            <End Role="employees" EntitySet="employees" />
-            <End Role="Enfant" EntitySet="Enfant" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Regul_Emp_employees_EmployeeMatricule" Association="Self.FK_Regul_Emp_employees_EmployeeMatricule">
-            <End Role="employees" EntitySet="employees" />
-            <End Role="Regul_Emp" EntitySet="Regul_Emp" />
-          </AssociationSet>
           <AssociationSet Name="FK_list_Remboursser_RembouserembourssementId" Association="Self.FK_list_Remboursser_RembouserembourssementId">
             <End Role="Remboursser" EntitySet="Remboursser" />
             <End Role="list" EntitySet="list" />
@@ -973,7 +834,145 @@
             <End Role="sites" EntitySet="sites" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="employees" EntityType="CMIMModel.employees" />
+          <AssociationSet Name="FK_employees_ActivityPlace_PlaceplacdeId" Association="CMIMModel.FK_employees_ActivityPlace_PlaceplacdeId">
+            <End Role="ActivityPlace" EntitySet="ActivityPlace" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employees_bu_buId" Association="CMIMModel.FK_employees_bu_buId">
+            <End Role="bu" EntitySet="bu" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conjoint_employees_Employeematricule" Association="CMIMModel.FK_Conjoint_employees_Employeematricule">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="Conjoint" EntitySet="Conjoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dossiers_employees_employeematricule" Association="CMIMModel.FK_Dossiers_employees_employeematricule">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="Dossiers" EntitySet="Dossiers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employees_Users_UserId" Association="CMIMModel.FK_employees_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enfant_employees_employeematricule" Association="CMIMModel.FK_Enfant_employees_employeematricule">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="Enfant" EntitySet="Enfant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Regul_Emp_employees_EmployeeMatricule" Association="CMIMModel.FK_Regul_Emp_employees_EmployeeMatricule">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="Regul_Emp" EntitySet="Regul_Emp" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="matricule" />
+          </Key>
+          <Property Name="matricule" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="matriculecmim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceplacdeId" Type="Int64" Nullable="false" />
+          <Property Name="buId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int64" />
+          <NavigationProperty Name="ActivityPlace" Relationship="CMIMModel.FK_employees_ActivityPlace_PlaceplacdeId" FromRole="employees" ToRole="ActivityPlace" />
+          <NavigationProperty Name="bu" Relationship="CMIMModel.FK_employees_bu_buId" FromRole="employees" ToRole="bu" />
+          <NavigationProperty Name="Conjoint" Relationship="CMIMModel.FK_Conjoint_employees_Employeematricule" FromRole="employees" ToRole="Conjoint" />
+          <NavigationProperty Name="Dossiers" Relationship="CMIMModel.FK_Dossiers_employees_employeematricule" FromRole="employees" ToRole="Dossiers" />
+          <NavigationProperty Name="Users" Relationship="CMIMModel.FK_employees_Users_UserId" FromRole="employees" ToRole="Users" />
+          <NavigationProperty Name="Enfant" Relationship="CMIMModel.FK_Enfant_employees_employeematricule" FromRole="employees" ToRole="Enfant" />
+          <NavigationProperty Name="Regul_Emp" Relationship="CMIMModel.FK_Regul_Emp_employees_EmployeeMatricule" FromRole="employees" ToRole="Regul_Emp" />
+        </EntityType>
+        <Association Name="FK_employees_ActivityPlace_PlaceplacdeId">
+          <End Type="CMIMModel.ActivityPlace" Role="ActivityPlace" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CMIMModel.employees" Role="employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityPlace">
+              <PropertyRef Name="placdeId" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="PlaceplacdeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employees_bu_buId">
+          <End Type="CMIMModel.bu" Role="bu" Multiplicity="0..1" />
+          <End Type="CMIMModel.employees" Role="employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bu">
+              <PropertyRef Name="BuId" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="buId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conjoint_employees_Employeematricule">
+          <End Type="CMIMModel.employees" Role="employees" Multiplicity="0..1" />
+          <End Type="CMIMModel.Conjoint" Role="Conjoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="matricule" />
+            </Principal>
+            <Dependent Role="Conjoint">
+              <PropertyRef Name="Employeematricule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dossiers_employees_employeematricule">
+          <End Type="CMIMModel.employees" Role="employees" Multiplicity="0..1" />
+          <End Type="CMIMModel.Dossiers" Role="Dossiers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="matricule" />
+            </Principal>
+            <Dependent Role="Dossiers">
+              <PropertyRef Name="employeematricule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employees_Users_UserId">
+          <End Type="CMIMModel.Users" Role="Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CMIMModel.employees" Role="employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enfant_employees_employeematricule">
+          <End Type="CMIMModel.employees" Role="employees" Multiplicity="0..1" />
+          <End Type="CMIMModel.Enfant" Role="Enfant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="matricule" />
+            </Principal>
+            <Dependent Role="Enfant">
+              <PropertyRef Name="employeematricule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Regul_Emp_employees_EmployeeMatricule">
+          <End Type="CMIMModel.employees" Role="employees" Multiplicity="0..1" />
+          <End Type="CMIMModel.Regul_Emp" Role="Regul_Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="matricule" />
+            </Principal>
+            <Dependent Role="Regul_Emp">
+              <PropertyRef Name="EmployeeMatricule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1053,21 +1052,6 @@
                 <ScalarProperty Name="etat" ColumnName="etat" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="EnfantId" ColumnName="EnfantId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="employees">
-            <EntityTypeMapping TypeName="CMIMModel.employees">
-              <MappingFragment StoreEntitySet="employees">
-                <ScalarProperty Name="matricule" ColumnName="matricule" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="adresse" ColumnName="adresse" />
-                <ScalarProperty Name="matriculecmim" ColumnName="matriculecmim" />
-                <ScalarProperty Name="PlaceplacdeId" ColumnName="PlaceplacdeId" />
-                <ScalarProperty Name="buId" ColumnName="buId" />
-                <ScalarProperty Name="company" ColumnName="company" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1156,6 +1140,21 @@
                 <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="siteId" ColumnName="siteId" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="CMIMModel.employees">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="buId" ColumnName="buId" />
+                <ScalarProperty Name="PlaceplacdeId" ColumnName="PlaceplacdeId" />
+                <ScalarProperty Name="matriculecmim" ColumnName="matriculecmim" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="matricule" ColumnName="matricule" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

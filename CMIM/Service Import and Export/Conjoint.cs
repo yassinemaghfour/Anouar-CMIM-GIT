@@ -28,10 +28,10 @@ namespace Service_Import_and_Export
         public string matriculecmim { get; set; }
         public System.DateTime DateNs { get; set; }
     
-        public virtual employees employees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dossiers> Dossiers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Enfant> Enfant { get; set; }
+        public virtual employees employees { get; set; }
     }
 }

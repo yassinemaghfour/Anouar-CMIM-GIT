@@ -34,8 +34,8 @@ namespace Service_Import_and_Export
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dossiers> Dossiers { get; set; }
+        public virtual sites sites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<employees> employees { get; set; }
-        public virtual sites sites { get; set; }
     }
 }

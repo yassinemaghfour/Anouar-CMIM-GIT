@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Import));
             this.txt_ConsoleLog = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnImporter = new System.Windows.Forms.Button();
             this.btnChooseFile = new System.Windows.Forms.Button();
             this.txtFile = new System.Windows.Forms.TextBox();
             this.rd_ImportEmployees = new System.Windows.Forms.RadioButton();
@@ -40,7 +41,6 @@
             this.menu = new System.Windows.Forms.MenuStrip();
             this.clearLog = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyLog = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnImporter = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menu.SuspendLayout();
             this.SuspendLayout();
@@ -53,6 +53,7 @@
             this.txt_ConsoleLog.Multiline = true;
             this.txt_ConsoleLog.Name = "txt_ConsoleLog";
             this.txt_ConsoleLog.ReadOnly = true;
+            this.txt_ConsoleLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_ConsoleLog.Size = new System.Drawing.Size(836, 248);
             this.txt_ConsoleLog.TabIndex = 0;
             // 
@@ -69,6 +70,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(836, 139);
             this.panel1.TabIndex = 1;
+            // 
+            // btnImporter
+            // 
+            this.btnImporter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImporter.Location = new System.Drawing.Point(252, 87);
+            this.btnImporter.Name = "btnImporter";
+            this.btnImporter.Size = new System.Drawing.Size(307, 34);
+            this.btnImporter.TabIndex = 9;
+            this.btnImporter.Text = "Importer les données depuis le fichier";
+            this.btnImporter.UseVisualStyleBackColor = true;
+            this.btnImporter.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnChooseFile
             // 
@@ -164,17 +176,6 @@
             this.CopyLog.Size = new System.Drawing.Size(28, 20);
             this.CopyLog.Text = "Copier messages du console";
             // 
-            // btnImporter
-            // 
-            this.btnImporter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImporter.Location = new System.Drawing.Point(252, 87);
-            this.btnImporter.Name = "btnImporter";
-            this.btnImporter.Size = new System.Drawing.Size(307, 34);
-            this.btnImporter.TabIndex = 9;
-            this.btnImporter.Text = "Importer les données depuis le fichier";
-            this.btnImporter.UseVisualStyleBackColor = true;
-            this.btnImporter.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Import
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -188,7 +189,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Import";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Service d\'importation";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

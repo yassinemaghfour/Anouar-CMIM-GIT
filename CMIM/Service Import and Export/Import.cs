@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,15 +20,15 @@ namespace Service_Import_and_Export
         public Import()
         {
             InitializeComponent();
-            companies.Add("VEM", "VIVO ENERGY MAROC");
-            companies.Add("SVL", "SHELL ET VIVO LUBRIFIANTS DU MAROC");
-            companies.Add("VEAS", "VIVO ENERGY AFRICA SERVICES");
-            companies.Add("SVLAS", "SHELL ET VIVOLUB AFRICA SERVICE (SVLAS)");
+            companies.Add("VIVO ENERGY MAROC", "VEM");
+            companies.Add( "SHELL ET VIVO LUBRIFIANTS DU MAROC", "SVL");
+            companies.Add("VIVO ENERGY AFRICA SERVICES", "VEAS");
+            companies.Add( "SHELL ET VIVOLUB AFRICA SERVICE (SVLAS)", "SVLAS");
         }
 
         private void btnChooseFile_Click(object sender, EventArgs e)
         {
-            using(var SFD = new SaveFileDialog() { Filter = "Fichier Excel | *xlsx" , CheckFileExists = true, CheckPathExists = true, Title = "Chosissez un fichier"})
+            using(var SFD = new OpenFileDialog() { Filter = "Fichier Excel | *xlsx" , CheckFileExists = true, CheckPathExists = true, Title = "Chosissez un fichier"})
             {
                 if(SFD.ShowDialog() == DialogResult.OK)
                 {
@@ -56,6 +57,11 @@ namespace Service_Import_and_Export
             {
                 btnImporter.Enabled = true;
             }));
+            txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+            {
+                txt_ConsoleLog.AppendText(Environment.NewLine + "********************* Fin de l'opération d'importation *************************");
+            }));
+            
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -64,11 +70,139 @@ namespace Service_Import_and_Export
             {
                 btnImporter.Enabled = false;
             }));
+            txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+            {
+                txt_ConsoleLog.ResetText();
+                txt_ConsoleLog.AppendText("************************** Début d'importation  **************************");
+            }));
+            if (rd_ImportEmployees.Checked)
+                ImporterEmployees();
+            else
+                ImporterRembourssement();
         }
+
+        private void ImporterRembourssement()
+        {
+            try
+            {
+
+                Dictionary<string, int> columns = new Dictionary<string, int>();
+
+                using (ExcelPackage excelPackage = new ExcelPackage(new FileInfo(txtFile.Text)))
+                {
+                    var db = new CMIMEntities();
+
+                    var myWorksheet = excelPackage.Workbook.Worksheets[1];
+                    var totalRows = myWorksheet.Dimension.End.Row;
+                    var totalColumns = myWorksheet.Dimension.End.Column;
+                    List<string> row;
+                    bool isAddedRemourssement = false;
+                    Remboursser remboursser = null;
+                    Dossiers dossiers;
+                    list list = null;
+                    string referenceDoss;
+
+
+                    row = myWorksheet.Cells[1, 1, 1, totalColumns].Select(c => c.Value == null ? string.Empty : c.Value.ToString()).ToList();
+
+                    foreach (string s in row)
+                    {
+                        columns.Add(s, row.IndexOf(s));
+                    }
+
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        
+                        if (!isAddedRemourssement)
+                        {
+                            remboursser = new Remboursser()
+                            {
+                                DateRembourssement = DateTime.Now
+                            };
+                            db.Remboursser.Add(remboursser);
+                            db.SaveChanges();
+                            txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+                            {
+                                txt_ConsoleLog.AppendText(Environment.NewLine + "Info: Ajout du rembourssement à la base sous numéro:  " + remboursser.rembourssementId + " .");
+                            }));
+                            isAddedRemourssement = true;
+                        }
+                        row = myWorksheet.Cells[i, 1, i, totalColumns].Select(c => c.Value == null ? string.Empty : c.Value.ToString()).ToList();
+
+                        referenceDoss = row[columns["Dossier"]];
+
+                        dossiers = db.Dossiers.Where(D => D.referance == referenceDoss).FirstOrDefault();
+                        if (dossiers != null)
+                        {
+                            if (dossiers.etat == "Envoyé à la CMIM")
+                            {
+                                dossiers.rembourse = double.Parse(row[columns["Montant"]].Trim());
+                                dossiers.rembourssementId = remboursser.rembourssementId;
+                                dossiers.etat = "Remboursé";
+
+                                list = new list()
+                                {
+                                    Dossierreferance = dossiers.referance,
+                                    montant = dossiers.rembourse,
+                                    RembouserembourssementId = remboursser.rembourssementId
+                                };
+
+                                db.list.Add(list);
+
+                               
+                                db.SaveChanges();
+
+                                txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+                                {
+                                    txt_ConsoleLog.AppendText(Environment.NewLine + "Info: Modification du dossier: " + dossiers.referance + " au statut 'REMBOURSE' avec le montant de rembourssement = " + list.montant + " DHS.");
+                                }));
+                            }
+                            else
+                                txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+                                {
+                                    txt_ConsoleLog.AppendText(Environment.NewLine + "Err: Le statut du dossier doit être 'Envoyé à la CMIM' avant d'importer le remboussement du dossier.");
+                                }));
+
+                        }
+                        else
+                        {
+                            txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+                            {
+                                txt_ConsoleLog.AppendText(Environment.NewLine + "Err: Le dossier " + row[columns["Dossier"]] + " n'existe pas dans la base de donnée.");
+                            }));
+
+                        }
+
+                    }
+                }
+
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        MessageBox.Show("Msg: " + ve.ErrorMessage + "\n" + ve.PropertyName);
+                    }
+                }
+            }
+            catch (IOException exept)
+            {
+                MessageBox.Show(exept.Message, "Un Erreur a été survenue lors de l'ouverture et lecture du fichier", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception Err)
+            {
+                MessageBox.Show(Err.Message.ToString(), "Un Erreur s'est produit lors de la mise à jour des clients", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    
 
         private void clearLog_Click(object sender, EventArgs e)
         {
-            txt_ConsoleLog.Clear();
+            txt_ConsoleLog.ResetText();
         }
 
         private void ImporterEmployees()
@@ -76,7 +210,7 @@ namespace Service_Import_and_Export
             try
             {
 
-                Dictionary<int, int> columns = new Dictionary<int, int>();
+                Dictionary<string, int> columns = new Dictionary<string, int>();
 
                 using (ExcelPackage excelPackage = new ExcelPackage(new FileInfo(txtFile.Text)))
                 {
@@ -87,93 +221,65 @@ namespace Service_Import_and_Export
                     var totalRows = myWorksheet.Dimension.End.Row;
                     var totalColumns = myWorksheet.Dimension.End.Column;
                     List<string> row;
-                    int AdrNumber;
+                    string matriculeEmployee;
 
-                    //  MessageBox.Show(totalRows.ToString());
 
-                    row = myWorksheet.Cells[1, 1, 1, totalColumns].Select(c => c.Value == null ? string.Empty : c.Value.ToString()).ToList();
+                    row = myWorksheet.Cells[4, 1, 4, totalColumns].Select(c => c.Value == null ? string.Empty : c.Value.ToString()).ToList();
+
                     foreach (string s in row)
                     {
                         columns.Add(s, row.IndexOf(s));
                     }
 
+                    Users users = db.Users.Where(U => U.Role == "Admin").FirstOrDefault();
 
-                    for (int i = 2; i <= totalRows; i++)
+
+                    for (int i = 5; i <= totalRows; i++)
                     {
                         row = myWorksheet.Cells[i, 1, i, totalColumns].Select(c => c.Value == null ? string.Empty : c.Value.ToString()).ToList();
 
-                        // MessageBox.Show(row.Count.ToString());
 
-                        AdrNumber = row[columns["ABAN8"]].Trim();
-                        lbllAchieve.Invoke(new MethodInvoker(delegate
-                        {
-                            lbllAchieve.Text = (i - 1) + " / " + (totalRows - 1);
-                        }));
+                        matriculeEmployee = row[columns["Id Num Personne"]].Trim();
 
-                        C = db.Clients.Where(Cl => Cl.Address_Nbr == AdrNumber).FirstOrDefault();
-                        if (C == null)
+                        e = db.employees.Where(emp => emp.matricule == matriculeEmployee).FirstOrDefault();
+                        if (e == null)
                         {
-                            C = new Client();
-                            C.Address_Nbr = AdrNumber;
-                            C.Alphaname = row[columns["ABALPH"]];
-                            if (row[columns["ABMCU"]] != null && row[columns["ABMCU"]].Trim().Length != 0)
-                                C.Business_Unite = int.Parse(row[columns["ABMCU"]].Trim());
-                            C.PaymentTerms = row[columns["A5TRAR01"]];
-                            C.TypeDocAccepte = row[columns["A5RYIN01"]];
-                            C.Adress1 = row[columns["ALADD1"]];
-                            C.Adress2 = row[columns["ALADD2"]];
-                            C.Adress3 = row[columns["ALADD3"]];
-                            C.CodePostal = row[columns["ALADDZ"]];
-                            C.Ville = row[columns["ALCTY1"]];
-                            C.TaxRate = row[columns["A5TXA1"]];
-                            C.TypeClient = row[columns["ABAC0102"]];
-                            C.ParentNumber = row[columns["ABPA8"]];
-                            C.ICE = row[columns["ABTX2"]];
-                            C.ABAT1 = row[columns["ABAT1"]];
-                            db.Clients.Add(C);
+                            if (companies.ContainsKey(row[columns["Raison Sociale Col"]]))
+                            {
+                                e = new employees()
+                                {
+                                    matricule = matriculeEmployee,
+                                    first_name = row[columns["Nom Per"]],
+                                    last_name = row[columns["Prenom Per"]],
+                                    matriculecmim = matriculeEmployee,
+                                    PlaceplacdeId = 1,
+                                    company = companies[row[columns["Raison Sociale Col"]]],
+                                    UserId = users.Id
+                                };
+                                db.employees.Add(e);
+                                txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+                                {
+                                    txt_ConsoleLog.AppendText(Environment.NewLine + "Info: Ajout effectué de l'employé: " + e.last_name + " " + e.first_name + " .");
+                                }));
+                                db.SaveChanges();
+                            }
+                            else
+                                txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+                                {
+                                    txt_ConsoleLog.AppendText(Environment.NewLine + "Err: La société de l'employée n'est pas correct.");
+                                }));
+                           
                         }
                         else
                         {
-                            C.Alphaname = row[columns["ABALPH"]];
-                            if (row[columns["ABMCU"]] != null && row[columns["ABMCU"]].Trim().Length != 0)
-                                C.Business_Unite = int.Parse(row[columns["ABMCU"]].Trim());
-                            C.PaymentTerms = row[columns["A5TRAR01"]];
-                            C.TypeDocAccepte = row[columns["A5RYIN01"]];
-                            C.Adress1 = row[columns["ALADD1"]];
-                            C.Adress2 = row[columns["ALADD2"]];
-                            C.Adress3 = row[columns["ALADD3"]];
-                            C.CodePostal = row[columns["ALADDZ"]];
-                            C.Ville = row[columns["ALCTY1"]];
-                            C.TaxRate = row[columns["A5TXA1"]];
-                            C.TypeClient = row[columns["ABAC0102"]];
-                            C.ParentNumber = row[columns["ABPA8"]];
-                            C.ICE = row[columns["ABTX2"]];
-                            C.ABAT1 = row[columns["ABAT1"]];
+                            txt_ConsoleLog.Invoke(new MethodInvoker(delegate
+                            {
+                                txt_ConsoleLog.AppendText(Environment.NewLine + "Err: L'employé " + row[columns["Nom Per"]] + " " + row[columns["Prenom Per"]] + " existe déjà dans la base de donnée.");
+                            }));
+                            
                         }
 
                     }
-                    db.SaveChanges();
-                }
-
-                using (var db = new VivoEnergy_FacturationEntities())
-                {
-                    Client client;
-                    foreach (Depot D in db.Depots.ToList())
-                    {
-                        client = db.Clients.Where(C => C.Address_Nbr == D.CodeDepot).FirstOrDefault();
-                        if (client == null)
-                        {
-                            client = new Client { Address_Nbr = D.CodeDepot, Alphaname = D.DepotName, isClient = false };
-                            db.Clients.Add(client);
-                        }
-                        else
-                        {
-                            client.Address_Nbr = D.CodeDepot;
-                            client.Alphaname = D.DepotName;
-                            client.isClient = false;
-                        }
-                    }
-                    db.SaveChanges();
                 }
 
 

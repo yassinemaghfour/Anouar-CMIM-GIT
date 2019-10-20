@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMIMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__EFMigrationsHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActivityPlace">
+    <Key>
+      <PropertyRef Name="placdeId" />
+    </Key>
+    <Property Name="placdeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="employees" Relationship="CMIMModel.FK_employees_ActivityPlace_PlaceplacdeId" FromRole="ActivityPlace" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="Bordereau">
+    <Key>
+      <PropertyRef Name="BordereauId" />
+    </Key>
+    <Property Name="BordereauId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_Bordereau_BordereauId" FromRole="Bordereau" ToRole="Dossiers" />
+  </EntityType>
+  <EntityType Name="bu">
+    <Key>
+      <PropertyRef Name="BuId" />
+    </Key>
+    <Property Name="BuId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="employees" Relationship="CMIMModel.FK_employees_bu_buId" FromRole="bu" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="Conjoint">
+    <Key>
+      <PropertyRef Name="ConjointId" />
+    </Key>
+    <Property Name="ConjointId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Employeematricule" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="matriculecmim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateNs" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_Conjoint_ConjointId" FromRole="Conjoint" ToRole="Dossiers" />
+    <NavigationProperty Name="Enfant" Relationship="Self.FK_Enfant_Conjoint_ConjointId" FromRole="Conjoint" ToRole="Enfant" />
+    <NavigationProperty Name="employees" Relationship="CMIMModel.FK_Conjoint_employees_Employeematricule" FromRole="Conjoint" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="Dossiers">
+    <Key>
+      <PropertyRef Name="referance" />
+    </Key>
+    <Property Name="referance" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="employeematricule" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="ConjointId" Type="Int64" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="dateDossier" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="dateLunette" Type="DateTime" Precision="7" />
+    <Property Name="montant" Type="Double" Nullable="false" />
+    <Property Name="Mt_radio" Type="Double" Nullable="false" />
+    <Property Name="Mt_analyse" Type="Double" Nullable="false" />
+    <Property Name="MtSoins_D" Type="Double" Nullable="false" />
+    <Property Name="MtProthese_D" Type="Double" Nullable="false" />
+    <Property Name="Devis_D" Type="Double" Nullable="false" />
+    <Property Name="MtVisite_M" Type="Double" Nullable="false" />
+    <Property Name="MtPharmacie_M" Type="Double" Nullable="false" />
+    <Property Name="MtVisite_L" Type="Double" Nullable="false" />
+    <Property Name="MtCadre_L" Type="Double" Nullable="false" />
+    <Property Name="MtGi_L" Type="Double" Nullable="false" />
+    <Property Name="avance" Type="Double" Nullable="false" />
+    <Property Name="rembourse" Type="Double" Nullable="false" />
+    <Property Name="diff" Type="Double" Nullable="false" />
+    <Property Name="rembourssementId" Type="Int64" />
+    <Property Name="BordereauId" Type="Int64" />
+    <Property Name="etat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnfantId" Type="Int64" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Bordereau" Relationship="Self.FK_Dossiers_Bordereau_BordereauId" FromRole="Dossiers" ToRole="Bordereau" />
+    <NavigationProperty Name="Conjoint" Relationship="Self.FK_Dossiers_Conjoint_ConjointId" FromRole="Dossiers" ToRole="Conjoint" />
+    <NavigationProperty Name="Enfant" Relationship="Self.FK_Dossiers_Enfant_EnfantId" FromRole="Dossiers" ToRole="Enfant" />
+    <NavigationProperty Name="Remboursser" Relationship="Self.FK_Dossiers_Remboursser_rembourssementId" FromRole="Dossiers" ToRole="Remboursser" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Dossiers_Users_UserId" FromRole="Dossiers" ToRole="Users" />
+    <NavigationProperty Name="list" Relationship="Self.FK_list_Dossiers_Dossierreferance" FromRole="Dossiers" ToRole="list" />
+    <NavigationProperty Name="employees" Relationship="CMIMModel.FK_Dossiers_employees_employeematricule" FromRole="Dossiers" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="Enfant">
+    <Key>
+      <PropertyRef Name="EnfantId" />
+    </Key>
+    <Property Name="EnfantId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateNs" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="DateVs" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="ConjointId" Type="Int64" Nullable="false" />
+    <Property Name="employeematricule" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="MatriculeCmim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Conjoint" Relationship="Self.FK_Enfant_Conjoint_ConjointId" FromRole="Enfant" ToRole="Conjoint" />
+    <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_Enfant_EnfantId" FromRole="Enfant" ToRole="Dossiers" />
+    <NavigationProperty Name="employees" Relationship="CMIMModel.FK_Enfant_employees_employeematricule" FromRole="Enfant" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="list">
+    <Key>
+      <PropertyRef Name="listId" />
+    </Key>
+    <Property Name="listId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RembouserembourssementId" Type="Int64" Nullable="false" />
+    <Property Name="Dossierreferance" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="montant" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Dossiers" Relationship="Self.FK_list_Dossiers_Dossierreferance" FromRole="list" ToRole="Dossiers" />
+    <NavigationProperty Name="Remboursser" Relationship="Self.FK_list_Remboursser_RembouserembourssementId" FromRole="list" ToRole="Remboursser" />
+  </EntityType>
+  <EntityType Name="Regul_Emp">
+    <Key>
+      <PropertyRef Name="regul_empID" />
+    </Key>
+    <Property Name="regul_empID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RégularisationRegularisationID" Type="Int64" />
+    <Property Name="EmployeeMatricule" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Regularisation" Relationship="Self.FK_Regul_Emp_Regularisation_RégularisationRegularisationID" FromRole="Regul_Emp" ToRole="Regularisation" />
+    <NavigationProperty Name="employees" Relationship="CMIMModel.FK_Regul_Emp_employees_EmployeeMatricule" FromRole="Regul_Emp" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="Regularisation">
+    <Key>
+      <PropertyRef Name="RegularisationID" />
+    </Key>
+    <Property Name="RegularisationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dateRegularisation" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Mois" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Regul_Emp" Relationship="Self.FK_Regul_Emp_Regularisation_RégularisationRegularisationID" FromRole="Regularisation" ToRole="Regul_Emp" />
+  </EntityType>
+  <EntityType Name="Remboursser">
+    <Key>
+      <PropertyRef Name="rembourssementId" />
+    </Key>
+    <Property Name="rembourssementId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateRembourssement" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_Remboursser_rembourssementId" FromRole="Remboursser" ToRole="Dossiers" />
+    <NavigationProperty Name="list" Relationship="Self.FK_list_Remboursser_RembouserembourssementId" FromRole="Remboursser" ToRole="list" />
+  </EntityType>
+  <EntityType Name="sites">
+    <Key>
+      <PropertyRef Name="SiteId" />
+    </Key>
+    <Property Name="SiteId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_sites_siteId" FromRole="sites" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Etat" Type="Boolean" Nullable="false" />
+    <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="siteId" Type="Int64" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Dossiers" Relationship="Self.FK_Dossiers_Users_UserId" FromRole="Users" ToRole="Dossiers" />
+    <NavigationProperty Name="sites" Relationship="Self.FK_Users_sites_siteId" FromRole="Users" ToRole="sites" />
+    <NavigationProperty Name="employees" Relationship="CMIMModel.FK_employees_Users_UserId" FromRole="Users" ToRole="employees" />
+  </EntityType>
+  <Association Name="FK_Dossiers_Bordereau_BordereauId">
+    <End Role="Bordereau" Type="Self.Bordereau" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bordereau">
+        <PropertyRef Name="BordereauId" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="BordereauId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Conjoint_ConjointId">
+    <End Role="Conjoint" Type="Self.Conjoint" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conjoint">
+        <PropertyRef Name="ConjointId" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="ConjointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enfant_Conjoint_ConjointId">
+    <End Role="Conjoint" Type="Self.Conjoint" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Enfant" Type="Self.Enfant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conjoint">
+        <PropertyRef Name="ConjointId" />
+      </Principal>
+      <Dependent Role="Enfant">
+        <PropertyRef Name="ConjointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Enfant_EnfantId">
+    <End Role="Enfant" Type="Self.Enfant" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enfant">
+        <PropertyRef Name="EnfantId" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="EnfantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Remboursser_rembourssementId">
+    <End Role="Remboursser" Type="Self.Remboursser" Multiplicity="0..1" />
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Remboursser">
+        <PropertyRef Name="rembourssementId" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="rembourssementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_Users_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_list_Dossiers_Dossierreferance">
+    <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="0..1" />
+    <End Role="list" Type="Self.list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dossiers">
+        <PropertyRef Name="referance" />
+      </Principal>
+      <Dependent Role="list">
+        <PropertyRef Name="Dossierreferance" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_list_Remboursser_RembouserembourssementId">
+    <End Role="Remboursser" Type="Self.Remboursser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="list" Type="Self.list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Remboursser">
+        <PropertyRef Name="rembourssementId" />
+      </Principal>
+      <Dependent Role="list">
+        <PropertyRef Name="RembouserembourssementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Regul_Emp_Regularisation_RégularisationRegularisationID">
+    <End Role="Regularisation" Type="Self.Regularisation" Multiplicity="0..1" />
+    <End Role="Regul_Emp" Type="Self.Regul_Emp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Regularisation">
+        <PropertyRef Name="RegularisationID" />
+      </Principal>
+      <Dependent Role="Regul_Emp">
+        <PropertyRef Name="RégularisationRegularisationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_sites_siteId">
+    <End Role="sites" Type="Self.sites" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sites">
+        <PropertyRef Name="SiteId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="siteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CMIMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+    <EntitySet Name="ActivityPlace" EntityType="Self.ActivityPlace" />
+    <EntitySet Name="Bordereau" EntityType="Self.Bordereau" />
+    <EntitySet Name="bu" EntityType="Self.bu" />
+    <EntitySet Name="Conjoint" EntityType="Self.Conjoint" />
+    <EntitySet Name="Dossiers" EntityType="Self.Dossiers" />
+    <EntitySet Name="Enfant" EntityType="Self.Enfant" />
+    <EntitySet Name="list" EntityType="Self.list" />
+    <EntitySet Name="Regul_Emp" EntityType="Self.Regul_Emp" />
+    <EntitySet Name="Regularisation" EntityType="Self.Regularisation" />
+    <EntitySet Name="Remboursser" EntityType="Self.Remboursser" />
+    <EntitySet Name="sites" EntityType="Self.sites" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Dossiers_Bordereau_BordereauId" Association="Self.FK_Dossiers_Bordereau_BordereauId">
+      <End Role="Bordereau" EntitySet="Bordereau" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Conjoint_ConjointId" Association="Self.FK_Dossiers_Conjoint_ConjointId">
+      <End Role="Conjoint" EntitySet="Conjoint" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enfant_Conjoint_ConjointId" Association="Self.FK_Enfant_Conjoint_ConjointId">
+      <End Role="Conjoint" EntitySet="Conjoint" />
+      <End Role="Enfant" EntitySet="Enfant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Enfant_EnfantId" Association="Self.FK_Dossiers_Enfant_EnfantId">
+      <End Role="Enfant" EntitySet="Enfant" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Remboursser_rembourssementId" Association="Self.FK_Dossiers_Remboursser_rembourssementId">
+      <End Role="Remboursser" EntitySet="Remboursser" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_Users_UserId" Association="Self.FK_Dossiers_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_list_Dossiers_Dossierreferance" Association="Self.FK_list_Dossiers_Dossierreferance">
+      <End Role="Dossiers" EntitySet="Dossiers" />
+      <End Role="list" EntitySet="list" />
+    </AssociationSet>
+    <AssociationSet Name="FK_list_Remboursser_RembouserembourssementId" Association="Self.FK_list_Remboursser_RembouserembourssementId">
+      <End Role="Remboursser" EntitySet="Remboursser" />
+      <End Role="list" EntitySet="list" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Regul_Emp_Regularisation_RégularisationRegularisationID" Association="Self.FK_Regul_Emp_Regularisation_RégularisationRegularisationID">
+      <End Role="Regularisation" EntitySet="Regularisation" />
+      <End Role="Regul_Emp" EntitySet="Regul_Emp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_sites_siteId" Association="Self.FK_Users_sites_siteId">
+      <End Role="sites" EntitySet="sites" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="employees" EntityType="CMIMModel.employees" />
+    <AssociationSet Name="FK_employees_ActivityPlace_PlaceplacdeId" Association="CMIMModel.FK_employees_ActivityPlace_PlaceplacdeId">
+      <End Role="ActivityPlace" EntitySet="ActivityPlace" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employees_bu_buId" Association="CMIMModel.FK_employees_bu_buId">
+      <End Role="bu" EntitySet="bu" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Conjoint_employees_Employeematricule" Association="CMIMModel.FK_Conjoint_employees_Employeematricule">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Conjoint" EntitySet="Conjoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dossiers_employees_employeematricule" Association="CMIMModel.FK_Dossiers_employees_employeematricule">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Dossiers" EntitySet="Dossiers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employees_Users_UserId" Association="CMIMModel.FK_employees_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enfant_employees_employeematricule" Association="CMIMModel.FK_Enfant_employees_employeematricule">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Enfant" EntitySet="Enfant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Regul_Emp_employees_EmployeeMatricule" Association="CMIMModel.FK_Regul_Emp_employees_EmployeeMatricule">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Regul_Emp" EntitySet="Regul_Emp" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="employees">
+    <Key>
+      <PropertyRef Name="matricule" />
+    </Key>
+    <Property Name="matricule" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="first_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="last_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="matriculecmim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PlaceplacdeId" Type="Int64" Nullable="false" />
+    <Property Name="buId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int64" />
+    <NavigationProperty Name="ActivityPlace" Relationship="CMIMModel.FK_employees_ActivityPlace_PlaceplacdeId" FromRole="employees" ToRole="ActivityPlace" />
+    <NavigationProperty Name="bu" Relationship="CMIMModel.FK_employees_bu_buId" FromRole="employees" ToRole="bu" />
+    <NavigationProperty Name="Conjoint" Relationship="CMIMModel.FK_Conjoint_employees_Employeematricule" FromRole="employees" ToRole="Conjoint" />
+    <NavigationProperty Name="Dossiers" Relationship="CMIMModel.FK_Dossiers_employees_employeematricule" FromRole="employees" ToRole="Dossiers" />
+    <NavigationProperty Name="Users" Relationship="CMIMModel.FK_employees_Users_UserId" FromRole="employees" ToRole="Users" />
+    <NavigationProperty Name="Enfant" Relationship="CMIMModel.FK_Enfant_employees_employeematricule" FromRole="employees" ToRole="Enfant" />
+    <NavigationProperty Name="Regul_Emp" Relationship="CMIMModel.FK_Regul_Emp_employees_EmployeeMatricule" FromRole="employees" ToRole="Regul_Emp" />
+  </EntityType>
+  <Association Name="FK_employees_ActivityPlace_PlaceplacdeId">
+    <End Type="CMIMModel.ActivityPlace" Role="ActivityPlace" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CMIMModel.employees" Role="employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityPlace">
+        <PropertyRef Name="placdeId" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="PlaceplacdeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employees_bu_buId">
+    <End Type="CMIMModel.bu" Role="bu" Multiplicity="0..1" />
+    <End Type="CMIMModel.employees" Role="employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bu">
+        <PropertyRef Name="BuId" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="buId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Conjoint_employees_Employeematricule">
+    <End Type="CMIMModel.employees" Role="employees" Multiplicity="0..1" />
+    <End Type="CMIMModel.Conjoint" Role="Conjoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="matricule" />
+      </Principal>
+      <Dependent Role="Conjoint">
+        <PropertyRef Name="Employeematricule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dossiers_employees_employeematricule">
+    <End Type="CMIMModel.employees" Role="employees" Multiplicity="0..1" />
+    <End Type="CMIMModel.Dossiers" Role="Dossiers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="matricule" />
+      </Principal>
+      <Dependent Role="Dossiers">
+        <PropertyRef Name="employeematricule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employees_Users_UserId">
+    <End Type="CMIMModel.Users" Role="Users" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CMIMModel.employees" Role="employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enfant_employees_employeematricule">
+    <End Type="CMIMModel.employees" Role="employees" Multiplicity="0..1" />
+    <End Type="CMIMModel.Enfant" Role="Enfant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="matricule" />
+      </Principal>
+      <Dependent Role="Enfant">
+        <PropertyRef Name="employeematricule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Regul_Emp_employees_EmployeeMatricule">
+    <End Type="CMIMModel.employees" Role="employees" Multiplicity="0..1" />
+    <End Type="CMIMModel.Regul_Emp" Role="Regul_Emp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="matricule" />
+      </Principal>
+      <Dependent Role="Regul_Emp">
+        <PropertyRef Name="EmployeeMatricule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

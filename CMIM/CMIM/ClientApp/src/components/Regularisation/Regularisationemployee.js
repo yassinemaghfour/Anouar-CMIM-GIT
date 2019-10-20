@@ -263,9 +263,6 @@ class Regularisationemployee extends React.Component {
 
     return (
       <Paper className={classes.root}>
-      {isLoad && 
-      <LinearProgress />
-      }
         <EnhancedTableToolbar numSelected={selected.length} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">

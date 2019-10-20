@@ -31,7 +31,6 @@ namespace Service_Import_and_Export
         public virtual DbSet<bu> bu { get; set; }
         public virtual DbSet<Conjoint> Conjoint { get; set; }
         public virtual DbSet<Dossiers> Dossiers { get; set; }
-        public virtual DbSet<employees> employees { get; set; }
         public virtual DbSet<Enfant> Enfant { get; set; }
         public virtual DbSet<list> list { get; set; }
         public virtual DbSet<Regul_Emp> Regul_Emp { get; set; }
@@ -40,5 +39,6 @@ namespace Service_Import_and_Export
         public virtual DbSet<sites> sites { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<employees> employees { get; set; }
     }
 }

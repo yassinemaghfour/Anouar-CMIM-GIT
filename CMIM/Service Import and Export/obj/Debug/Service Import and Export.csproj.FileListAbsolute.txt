@@ -16,3 +16,4 @@ C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and E
 C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\bin\Debug\EPPlus.xml
 C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service Import and Export.csproj.CopyComplete
+C:\Users\yassi\Desktop\Anouar CMIM GIT\Anouar-CMIM-GIT\CMIM\Service Import and Export\obj\Debug\Service_Import_and_Export.Export.resources

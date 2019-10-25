@@ -16,7 +16,7 @@ namespace Service_Import_and_Export
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Import());
+            Application.Run(new Form1());
         }
     }
 }

@@ -29,25 +29,63 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.menu = new System.Windows.Forms.MenuStrip();
+            this.importationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // menu
+            // 
+            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importationToolStripMenuItem,
+            this.exportationToolStripMenuItem});
+            this.menu.Location = new System.Drawing.Point(0, 0);
+            this.menu.Name = "menu";
+            this.menu.Size = new System.Drawing.Size(904, 24);
+            this.menu.TabIndex = 7;
+            this.menu.Text = "menuStrip1";
+            // 
+            // importationToolStripMenuItem
+            // 
+            this.importationToolStripMenuItem.Name = "importationToolStripMenuItem";
+            this.importationToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.importationToolStripMenuItem.Text = "Importation";
+            this.importationToolStripMenuItem.Click += new System.EventHandler(this.importationToolStripMenuItem_Click);
+            // 
+            // exportationToolStripMenuItem
+            // 
+            this.exportationToolStripMenuItem.Name = "exportationToolStripMenuItem";
+            this.exportationToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.exportationToolStripMenuItem.Text = "Exportation";
+            this.exportationToolStripMenuItem.Click += new System.EventHandler(this.exportationToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 538);
+            this.ClientSize = new System.Drawing.Size(904, 531);
+            this.Controls.Add(this.menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Service d\'import et export";
+            this.Text = "Service d\'importation et exportation";
+            this.menu.ResumeLayout(false);
+            this.menu.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.MenuStrip menu;
+        private System.Windows.Forms.ToolStripMenuItem importationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportationToolStripMenuItem;
     }
 }
 
